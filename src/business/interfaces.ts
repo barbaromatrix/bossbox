@@ -1,11 +1,15 @@
 // import { Model } from 'mongoose'
-// import { ToolModel } from '../repository/tools'
+import { Tool } from '../repository/interfaces'
 
-export interface IGetTools {
+export interface ITools {
   // model?: Model<ToolModel>
   model: any
 }
 
-export interface IGetToolsByTag extends IGetTools {
+export interface ICreateTool extends ITools {
+  tool: Tool
+}
+
+export interface IToolsByTag extends ITools {
   tag: any
 }
