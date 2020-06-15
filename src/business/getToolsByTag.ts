@@ -1,4 +1,4 @@
-import { IGetToolsByTag } from './interfaces'
+import { IToolsByTag } from './interfaces'
 
-export default ({ tag, model }: IGetToolsByTag) =>
+export default ({ tag, model }: IToolsByTag) =>
   model.find({ tags: tag })
