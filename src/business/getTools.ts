@@ -1,6 +1,5 @@
-import { Tool } from '../repository/interfaces'
-import { tools } from '../repository'
+import { IGetTools } from './interfaces'
+import { toolsModel } from '../repository'
 
-export default (): Tool[] => {
-  return tools
-}
+export default ({ model }: IGetTools) =>
+  model.find()

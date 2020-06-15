@@ -1,6 +1,4 @@
-import { Tool } from '../repository/interfaces'
-import { tools } from '../repository'
+import { IGetToolsByTag } from './interfaces'
 
-export default ({ tag }: { tag: any }): Tool[] => {
-  return tools.filter((tool: Tool) => tool.tags.lastIndexOf(tag) > -1)
-}
+export default ({ tag, model }: IGetToolsByTag) =>
+  model.find({ tags: tag })
