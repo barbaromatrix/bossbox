@@ -1,7 +1,8 @@
 import { connect } from 'mongoose'
+import { default as config } from '../../config'
 
 export const connectToDatabase = async () => {
-  const databaseConnection = await connect('mongodb://127.0.0.1/bossabox', {
+  const databaseConnection = await connect(config.database.url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })

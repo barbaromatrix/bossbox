@@ -16,8 +16,7 @@ const toolSchema = new Schema({
   },
   tags: {
     required: true,
-    type: [Schema.Types.String],
-    validate: [(tags => Array.isArray(tags) && tags.length > 0), '{PATH} must have min length of 1']
+    type: [Schema.Types.String]
   }
 })
 

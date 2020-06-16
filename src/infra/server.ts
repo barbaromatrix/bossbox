@@ -3,7 +3,6 @@ import * as cors from 'cors'
 import * as morgan from 'morgan'
 
 import { connectToDatabase } from './database'
-
 import { createRoutes } from './routes'
 
 export const createServer = async (): Promise<express.Application> => {
@@ -13,8 +12,7 @@ export const createServer = async (): Promise<express.Application> => {
   app.use(cors())
   app.use(morgan('combined'))
 
-  await connectToDatabase()
-  createRoutes(app)
+  await Promise.all([connectToDatabase(), createRoutes(app)])
 
   return app
 }
