@@ -1,13 +1,10 @@
 import { IGetToolById } from './interfaces'
+import { IRepository } from 'repository/interfaces'
+import { Tool } from './interfaces'
 
-export default async ({ id, model }: IGetToolById): Promise<Boolean> => {
+export default async ({ id }: IGetToolById, repo: IRepository<Tool>): Promise<Boolean> => {
   try {
-    const tool = await model.findById(id)
-    if (!tool) {
-      return false
-    }
-
-    return await tool.remove()
+    return repo.delete(id)
   } catch (error) {
     throw error
   }

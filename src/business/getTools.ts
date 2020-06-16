@@ -1,4 +1,5 @@
-import { ITools } from './interfaces'
+import { IRepository } from 'repository/interfaces'
+import { Tool } from './interfaces'
 
-export default ({ model }: ITools) =>
-  model.find()
+export default (repo: IRepository<Tool>) =>
+  repo.find()

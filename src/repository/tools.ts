@@ -1,10 +1,8 @@
-import { Schema, model, Document, Model } from 'mongoose'
-import { Tool } from './interfaces'
-
-export interface ToolModel extends Document, Tool {}
+import { Schema, model, Model } from 'mongoose'
+import { IRepository } from './interfaces'
+import { Tool } from '../business/interfaces'
 
 const toolSchema = new Schema({
-  id: Number,
   title: {
     type: Schema.Types.String
   },
@@ -20,5 +18,34 @@ const toolSchema = new Schema({
   }
 })
 
-const toolsModel: Model<ToolModel> =  model<ToolModel>('Tool', toolSchema)
-export default toolsModel
+const toolsModel: Model<Tool> = model<Tool>('Tool', toolSchema)
+
+const toolRepository: IRepository<Tool> = {
+  find(tool) {
+    return tool
+      ? toolsModel
+        .find({
+          tags: {
+            '$all': tool.tags
+          }
+        })
+        .exec()
+      : toolsModel
+        .find()
+        .exec()
+  },
+  create(tool) {
+    return toolsModel.create(tool)
+  },
+  update(id, tool) {
+    return toolsModel
+      .update({ _id: id }, tool)
+      .exec()
+  },
+  async delete(id) {
+    const { ok } = await toolsModel.remove({ _id: id }).exec()
+    return Boolean(ok)
+  }
+}
+
+export default toolRepository

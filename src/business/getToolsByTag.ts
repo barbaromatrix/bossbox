@@ -1,8 +1,10 @@
-import { IToolsByTag } from './interfaces'
+import { IRepository } from 'repository/interfaces'
+import { Tool } from './interfaces'
 
-export default ({ tag, model }: IToolsByTag) =>
-  model.find({
-    tags: {
-      '$all': tag
-    }
-  })
+type Tags = string[]
+
+export default (tags: Tags, repo: IRepository<Tool>) => {
+  return Array.isArray(tags)
+    ? repo.find({ tags })
+    : repo.find({ tags: [tags] })
+}

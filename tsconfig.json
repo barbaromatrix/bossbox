@@ -4,6 +4,7 @@
     "moduleResolution": "node",
     "declaration": true,
     "removeComments": true,
+    "resolveJsonModule": true,
     "target": "es2018",
     "sourceMap": true,
     "outDir": "./dist",

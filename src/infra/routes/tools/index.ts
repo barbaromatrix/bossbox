@@ -11,12 +11,11 @@ toolRouter
     try {
       const { tag } = req.query
       if (tag) {
-        console.log(tag)
-        const tools = await getToolsByTag({ tag, model: toolsModel })
+        const tools = await getToolsByTag(tag.toString().split(','), toolsModel)
         return res.status(200).json(tools)
       }
 
-      const tools = await getTools({ model: toolsModel })
+      const tools = await getTools(toolsModel)
       return res.status(200).json(tools)
     } catch (error) {
       return res.sendStatus(500)
@@ -24,7 +23,7 @@ toolRouter
   })
   .post('/tools', requestValidation({ schema: createToolsRequest, requestType: 'body' }), async (req: Request, res: Response) => {
     try {
-      const tool = await createTool({ tool: req.body, model: toolsModel })
+      const tool = await createTool({ tool: req.body }, toolsModel)
 
       return res.status(201).json(tool)
     } catch (error) {
@@ -33,7 +32,7 @@ toolRouter
   })
   .delete('/tools/:id', requestValidation({ schema: deleteToolRequest, requestType: 'params' }), async (req: Request, res: Response) => {
     try {
-      const tool = await deleteTool({ id: req.params.id, model: toolsModel })
+      const tool = await deleteTool({ id: req.params.id }, toolsModel)
 
       if (!tool) {
         return res.sendStatus(404)

@@ -1,9 +1,10 @@
 import { ICreateTool } from './interfaces'
+import { IRepository } from 'repository/interfaces'
+import { Tool } from './interfaces'
 
-export default async ({ model, tool }: ICreateTool) => {
+export default async ({ tool }: ICreateTool, repo: IRepository<Tool>) => {
   try {
-    const createdTool = new model(tool)
-    return createdTool.save()
+    return repo.create(tool)
   } catch (error) {
     throw error
   }

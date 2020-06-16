@@ -1,18 +1,24 @@
-import { Tool } from '../repository/interfaces'
+import { IRepository, IRecord } from '../repository/interfaces'
 
-export interface ITools {
-  // model?: Model<ToolModel>
-  model: any
+export interface Tool extends IRecord {
+  title: string
+  link: string
+  description: string
+  tags: string[]
 }
 
-export interface ICreateTool extends ITools {
+export interface ITools {
+  model: IRepository<Tool>
+}
+
+export interface ICreateTool {
   tool: Tool
 }
 
-export interface IGetToolById extends ITools{
+export interface IGetToolById{
   id: string
 }
 
-export interface IToolsByTag extends ITools {
-  tag: any
+export interface IToolsByTag {
+  tag: string | string[]
 }

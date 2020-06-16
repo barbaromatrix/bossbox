@@ -5,7 +5,7 @@ import * as morgan from 'morgan'
 import { connectToDatabase } from './database'
 import { createRoutes } from './routes'
 
-export const createServer = async (): Promise<express.Application> => {
+export const createServer = async () => {
   const app = express()
   app.use(express.json())
   app.use(express.urlencoded({ extended: true }))
