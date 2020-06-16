@@ -1,0 +1,37 @@
+{
+  "globals": {
+    "PORT":"3000",
+    "DATABASE_URI":"mongodb://127.0.0.1",
+    "DATABASE_NAME":"bossabox"
+  },
+  "moduleFileExtensions": [
+    "js",
+    "json",
+    "ts"
+  ],
+  "modulePathIgnorePatterns": [
+    "dist",
+    "node_modules"
+  ],
+  "rootDir": ".",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "coverageDirectory": "./coverage",
+  "testEnvironment": "node",
+  "coverageReporters": [
+    "coverage",
+    "html"
+  ],
+  "collectCoverageFrom": [
+    "src/**/*.ts"
+  ],
+  "coverageThreshold": {
+    "global": {
+      "branches": 60,
+      "functions": 60,
+      "lines": 60,
+      "statements": 60
+    }
+  }
+}

@@ -40,37 +40,5 @@
     "hooks": {
       "pre-commit": "yarn lint:fix"
     }
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "modulePathIgnorePatterns": [
-      "dist",
-      "node_modules"
-    ],
-    "rootDir": ".",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    },
-    "coverageDirectory": "./coverage",
-    "testEnvironment": "node",
-    "coverageReporters": [
-      "coverage",
-      "html"
-    ],
-    "collectCoverageFrom": [
-      "src/**/*.ts"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 60,
-        "functions": 60,
-        "lines": 60,
-        "statements": 60
-      }
-    }
   }
 }
