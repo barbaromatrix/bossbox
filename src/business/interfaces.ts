@@ -1,4 +1,3 @@
-// import { Model } from 'mongoose'
 import { Tool } from '../repository/interfaces'
 
 export interface ITools {
@@ -8,6 +7,10 @@ export interface ITools {
 
 export interface ICreateTool extends ITools {
   tool: Tool
+}
+
+export interface IGetToolById extends ITools{
+  id: string
 }
 
 export interface IToolsByTag extends ITools {

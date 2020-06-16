@@ -1,14 +1,17 @@
 import { Router, Request, Response } from 'express'
-import { getTools, getToolsByTag, createTool } from '../../../business'
+import { getTools, getToolsByTag, createTool, deleteTool } from '../../../business'
+import { requestValidation } from '../middlewares/validator'
+import { getToolsRequest, createToolsRequest } from './validator'
 import { toolsModel } from '../../../repository'
 
 const toolRouter: Router = Router()
 
 toolRouter
-  .get('/tools', async (req: Request, res: Response) => {
+  .get('/tools', requestValidation({ schema: getToolsRequest, requestType: 'query' }), async (req: Request, res: Response) => {
     try {
       const { tag } = req.query
       if (tag) {
+        console.log(tag)
         const tools = await getToolsByTag({ tag, model: toolsModel })
         return res.status(200).json(tools)
       }
@@ -19,7 +22,7 @@ toolRouter
       return res.sendStatus(500)
     }
   })
-  .post('/tools', async (req: Request, res: Response) => {
+  .post('/tools', requestValidation({ schema: createToolsRequest, requestType: 'body' }), async (req: Request, res: Response) => {
     try {
       const tool = await createTool({ tool: req.body, model: toolsModel })
 
@@ -28,9 +31,15 @@ toolRouter
       return res.sendStatus(500)
     }
   })
-  .delete('/tools/:id', (req: Request, res: Response) => {
+  .delete('/tools/:id', async (req: Request, res: Response) => {
     try {
-      return res.sendStatus(501)
+      const tool = await deleteTool({ id: req.params.id, model: toolsModel })
+
+      if (!tool) {
+        return res.sendStatus(404)
+      }
+
+      return res.sendStatus(204)
     } catch (error) {
       return res.sendStatus(500)
     }
