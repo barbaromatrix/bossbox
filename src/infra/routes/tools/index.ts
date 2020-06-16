@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express'
 import { getTools, getToolsByTag, createTool, deleteTool } from '../../../business'
 import { requestValidation } from '../middlewares/validator'
-import { getToolsRequest, createToolsRequest } from './validator'
+import { getToolsRequest, createToolsRequest, deleteToolRequest } from './validator'
 import { toolsModel } from '../../../repository'
 
 const toolRouter: Router = Router()
@@ -31,7 +31,7 @@ toolRouter
       return res.sendStatus(500)
     }
   })
-  .delete('/tools/:id', async (req: Request, res: Response) => {
+  .delete('/tools/:id', requestValidation({ schema: deleteToolRequest, requestType: 'params' }), async (req: Request, res: Response) => {
     try {
       const tool = await deleteTool({ id: req.params.id, model: toolsModel })
 

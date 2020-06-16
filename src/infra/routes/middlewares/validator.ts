@@ -25,16 +25,3 @@ export const requestValidation = ({ schema, requestType }: IRequestValidation) =
 
     return next()
   }
-
-export const responseValidation = schema => (request: Request, response, next: NextFunction) => {
-  const { error } = validate(response.data, schema)
-
-  if (error) {
-    return next(error)
-  }
-
-  return response
-    .status(response.statusCode || 200)
-    .json({ data: response.data, error: null })
-    .end()
-}
