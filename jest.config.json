@@ -11,7 +11,8 @@
   ],
   "modulePathIgnorePatterns": [
     "dist",
-    "node_modules"
+    "node_modules",
+    "interfaces.ts"
   ],
   "rootDir": ".",
   "transform": {
@@ -20,7 +21,7 @@
   "coverageDirectory": "./coverage",
   "testEnvironment": "node",
   "coverageReporters": [
-    "coverage",
+    "cobertura",
     "html"
   ],
   "collectCoverageFrom": [

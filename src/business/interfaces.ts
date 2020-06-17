@@ -1,4 +1,4 @@
-import { IRepository, IRecord } from '../repository/interfaces'
+import { IRecord } from '../repository/interfaces'
 
 export interface Tool extends IRecord {
   title: string
@@ -7,15 +7,11 @@ export interface Tool extends IRecord {
   tags: string[]
 }
 
-export interface ITools {
-  model: IRepository<Tool>
-}
-
 export interface ICreateTool {
   tool: Tool
 }
 
-export interface IGetToolById{
+export interface IGetToolById {
   id: string
 }
 
