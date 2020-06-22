@@ -8,11 +8,19 @@ config()
 
 const envVar = Joi.attempt(process.env, envSchema)
 
-export default <IConfig>{
+const applicationConfig: IConfig = {
   application: {
     port: envVar.PORT,
   },
   database: {
     url: new URL(envVar.DATABASE_NAME, envVar.DATABASE_URI).toString(),
+  },
+  security: {
+    passwordSecret: envVar.ENCODE_SECRET,
+    jwtSecret: envVar.JWT_SECRET,
+    jwtAccessTokenExpirationTime: envVar.JWT_ACCESS_TOKEN_EXPIRATION_TIME,
+    jwtRefreshTokenExpirationTime: envVar.JWT_REFRESH_TOKEN_EXPIRATION_TIME
   }
 }
+
+export default applicationConfig
