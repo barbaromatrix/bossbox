@@ -18,7 +18,7 @@ const toolSchema = new Schema({
   }
 })
 
-const toolsModel: Model<Tool> = model<Tool>('Tool', toolSchema)
+const toolsModel: Model<Tool> = model<Tool>('Tool', toolSchema, 'tools')
 
 const toolRepository: IRepository<Tool> = {
   find(tool) {

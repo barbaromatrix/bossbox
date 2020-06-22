@@ -1,5 +1,5 @@
-import { IRepository } from 'repository/interfaces'
-import { Tool } from './interfaces'
+import { IRepository } from '../../repository/interfaces'
+import { Tool } from '../interfaces'
 
 type Tags = string[]
 
