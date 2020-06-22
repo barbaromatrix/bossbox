@@ -2,7 +2,10 @@
   "globals": {
     "PORT":"3000",
     "DATABASE_URI":"mongodb://127.0.0.1",
-    "DATABASE_NAME":"bossabox"
+    "DATABASE_NAME":"bossabox",
+    "JWT_SECRET":"sampleSecretDoNotShare",
+    "JWT_REFRESH_TOKEN_EXPIRATION_TIME":100,
+    "JWT_ACCESS_TOKEN_EXPIRATION_TIME":300
   },
   "moduleFileExtensions": [
     "js",
