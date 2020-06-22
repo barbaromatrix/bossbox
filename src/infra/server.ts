@@ -6,13 +6,17 @@ import { connectToDatabase } from './database'
 import { createRoutes } from './routes'
 
 export const createServer = async () => {
-  const app = express()
-  app.use(express.json())
-  app.use(express.urlencoded({ extended: true }))
-  app.use(cors())
-  app.use(morgan('combined'))
+  try {
+    const app = express()
+    app.use(express.json())
+    app.use(express.urlencoded({ extended: true }))
+    app.use(cors())
+    app.use(morgan('combined'))
 
-  await Promise.all([connectToDatabase(), createRoutes(app)])
+    await Promise.all([connectToDatabase(), createRoutes(app)])
 
-  return app
+    return app
+  } catch (error) {
+    throw error
+  }
 }

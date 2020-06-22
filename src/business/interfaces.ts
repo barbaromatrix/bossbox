@@ -7,6 +7,11 @@ export interface Tool extends IRecord {
   tags: string[]
 }
 
+export interface Auth extends IRecord {
+  username: string
+  password: string
+}
+
 export interface ICreateTool {
   tool: Tool
 }
