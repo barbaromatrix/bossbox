@@ -1,7 +1,8 @@
 import * as express from 'express'
 import * as cors from 'cors'
 import * as morgan from 'morgan'
-
+import * as swaggerUi from 'swagger-ui-express'
+import * as document from '../../documentation/documentation.json'
 import { connectToDatabase } from './database'
 import { createRoutes } from './routes'
 
@@ -14,6 +15,8 @@ export const createServer = async () => {
     app.use(morgan('combined'))
 
     await Promise.all([connectToDatabase(), createRoutes(app)])
+
+    app.use('/docs', swaggerUi.serve, swaggerUi.setup(document))
 
     return app
   } catch (error) {

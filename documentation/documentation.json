@@ -1,0 +1,354 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is the documentation page of VUTTR Api.",
+    "version": "1.0.0",
+    "title": "Swagger VUTTR",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "tags": [
+    {
+      "name": "tools",
+      "description": "Tools that can be stored by the user"
+    },
+    {
+      "name": "auth",
+      "description": "Everything about authorization/authentication"
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/tools": {
+      "get": {
+        "tags": [
+          "tools"
+        ],
+        "summary": "Get a list of tool",
+        "description": "Get a list of tools (if it does not exist)",
+        "operationId": "getTool",
+        "parameters": [
+          {
+            "name": "tag",
+            "in": "query",
+            "description": "The tag name that a tool may be related",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of tools",
+            "schema": {
+              "$ref": "#/definitions/Tools"
+            }
+          }
+        },
+        "security": [
+          {
+            "jwtAuthorization": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "tools"
+        ],
+        "summary": "Add a tool",
+        "description": "Add a new tool (if it does not exist)",
+        "operationId": "addTool",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Tool object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Tool"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created tool",
+            "schema": {
+              "$ref": "#/definitions/Tool"
+            }
+          }
+        },
+        "security": [
+          {
+            "jwtAuthorization": []
+          }
+        ]
+      }
+    },
+    "/tools/{toolId}": {
+      "get": {
+        "tags": [
+          "tools"
+        ],
+        "summary": "Find a tool by its ID",
+        "description": "Returns a single tool",
+        "operationId": "getToolsById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "toolId",
+            "in": "path",
+            "description": "Id of tool to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tool found by its Id",
+            "schema": {
+              "$ref": "#/definitions/Tool"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Tool not found"
+          }
+        },
+        "security": [
+          {
+            "jwtAuthorization": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "tools"
+        ],
+        "summary": "Delete a tool",
+        "description": "Delete a single tool",
+        "operationId": "deleteToolsById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "toolId",
+            "in": "path",
+            "description": "Id of tool to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content to be shown"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Tool not found"
+          }
+        },
+        "security": [
+          {
+            "jwtAuthorization": []
+          }
+        ]
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Logs user into the system",
+        "description": "Handles the user authentication",
+        "operationId": "userLogin",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful user authentication",
+            "schema": {
+              "$ref": "#/definitions/Auth"
+            }
+          },
+          "400": {
+            "description": "Invalid username/password supplied"
+          }
+        }
+      }
+    },
+    "/auth/signup": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Handles the user sign-up",
+        "description": "",
+        "operationId": "signupUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful user creation",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    },
+    "/auth/login/refresh": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Refresh user authentication into the system",
+        "description": "Handles the user authentication's refresh",
+        "operationId": "userLoginRefresh",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful user authentication",
+            "schema": {
+              "$ref": "#/definitions/Auth"
+            }
+          },
+          "400": {
+            "description": "Invalid username/password supplied"
+          }
+        },
+        "security": [
+          {
+            "jwtAuthorization": []
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "jwtAuthorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in":  "header"
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "Tag": {
+      "type": "string"
+    },
+    "Tools": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tool"
+      }
+    },
+    "Tool": {
+      "type": "object",
+      "required": [
+        "title",
+        "description",
+        "link",
+        "tags"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Bossabox"
+        },
+        "description": {
+          "type": "string"
+        },
+        "link": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          }
+        }
+      }
+    },
+    "Auth": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string"
+        },
+        "refreshToken": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
