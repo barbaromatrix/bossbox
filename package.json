@@ -35,6 +35,9 @@
     "ts-node-dev": "^1.0.0-pre.47",
     "typescript": "^3.9.5"
   },
+  "engines": {
+    "node": ">=10"
+  },
   "scripts": {
     "start": "node dist/index.js",
     "dev": "ts-node-dev --respawn --transpileOnly ./src/index.ts",
